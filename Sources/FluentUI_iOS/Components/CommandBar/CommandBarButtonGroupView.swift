@@ -29,10 +29,10 @@ class CommandBarButtonGroupView: UIView {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-         preconditionFailure("init(coder:) has not been implemented")
+        preconditionFailure("init(coder:) has not been implemented")
     }
 
-    /// Hides the group view if all the views inside the `stackView` are hidden.
+    /// Hides the group view if all the views inside the `stackView` are hidden
     func hideGroupIfNeeded() {
         var allViewsHidden = true
         for view in stackView.arrangedSubviews {
@@ -48,11 +48,11 @@ class CommandBarButtonGroupView: UIView {
 
     weak var separator: Separator?
 
-     var equalWidthButtons: Bool = false {
-         didSet {
-             stackView.distribution = equalWidthButtons ? .fillEqually : .fill
-         }
-     }
+    var equalWidthButtons: Bool = false {
+        didSet {
+            stackView.distribution = equalWidthButtons ? .fillEqually : .fill
+        }
+    }
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: buttons)
