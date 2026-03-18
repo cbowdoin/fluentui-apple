@@ -269,6 +269,15 @@ class CommandBarDemoController: DemoController {
         commandBarDelegateEventAnimationView.addArrangedSubview(commandBarDelegateEventAnimationSwitch)
         itemCustomizationContainer.addArrangedSubview(commandBarDelegateEventAnimationView)
 
+        let firstGroupSeparatorStackView = createHorizontalStackView()
+        firstGroupSeparatorStackView.addArrangedSubview(createLabelWithText("First Group Separator"))
+        let firstGroupSeparatorSwitch: BrandedSwitch = BrandedSwitch()
+        firstGroupSeparatorSwitch.isOn = false
+        firstGroupSeparatorSwitch.addTarget(self, action: #selector(firstGroupSeparatorValueChanged), for: .valueChanged)
+        firstGroupSeparatorStackView.addArrangedSubview(firstGroupSeparatorSwitch)
+        itemCustomizationContainer.addArrangedSubview(firstGroupSeparatorStackView)
+
+
         itemCustomizationContainer.addArrangedSubview(UIView()) //Spacer
 
         container.addArrangedSubview(itemCustomizationContainer)
@@ -338,9 +347,9 @@ class CommandBarDemoController: DemoController {
         ]
 
         let itemGroups: [CommandBarItemGroup] = commandGroups.map { commandGroup in
-            commandGroup.map { command in
+            CommandBarItemGroup(commandGroup.map { command in
                 newItem(for: command)
-            }
+            })
         }
 
         itemGroups[0][1].isEnabled = false
@@ -468,6 +477,10 @@ class CommandBarDemoController: DemoController {
 
     @objc func animateCommandBarDelegateEventsValueChanged(sender: UISwitch!) {
         animateCommandBarDelegateEvents = sender.isOn
+    }
+
+    @objc func firstGroupSeparatorValueChanged(sender: UISwitch!) {
+        defaultCommandBar?.itemGroups.first?.showsSeparatorAfter = sender.isOn
     }
 
     @objc func refreshDefaultBarItems(sender: UIButton!) {

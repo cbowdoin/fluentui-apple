@@ -84,6 +84,10 @@ class CommandBarCommandGroupsView: UIView {
                 }
             }
 
+            items.separatorChangedHandler = { [weak self] in
+                self?.updateButtonsShown()
+            }
+
             return group
         }
     }
@@ -95,9 +99,15 @@ class CommandBarCommandGroupsView: UIView {
         }
 
         updateButtonGroupViews()
-        for view in buttonGroupViews {
-            view.equalWidthButtons = equalWidthGroups
-            buttonGroupsStackView.addArrangedSubview(view)
+        for (groupView, itemGroup) in zip(buttonGroupViews, itemGroups) {
+            groupView.equalWidthButtons = equalWidthGroups
+            buttonGroupsStackView.addArrangedSubview(groupView)
+
+            if itemGroup.showsSeparatorAfter {
+                let separator = Separator(orientation: .vertical)
+                buttonGroupsStackView.addArrangedSubview(separator)
+                groupView.separator = separator
+            }
         }
     }
 

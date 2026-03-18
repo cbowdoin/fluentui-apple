@@ -29,10 +29,11 @@ class CommandBarButtonGroupView: UIView {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        preconditionFailure("init(coder:) has not been implemented")
+         preconditionFailure("init(coder:) has not been implemented")
     }
 
-    /// Hides the group view if all the views inside the `stackView` are hidden
+    /// Hides the group view if all the views inside the `stackView` are hidden.
+    /// Also hides the associated `separator` so a dangling divider is never shown for an empty group.
     func hideGroupIfNeeded() {
         var allViewsHidden = true
         for view in stackView.arrangedSubviews {
@@ -43,13 +44,18 @@ class CommandBarButtonGroupView: UIView {
         }
 
         isHidden = allViewsHidden
+        separator?.isHidden = allViewsHidden
     }
 
-    var equalWidthButtons: Bool = false {
-        didSet {
-            stackView.distribution = equalWidthButtons ? .fillEqually : .fill
-        }
-    }
+    /// The separator that follows this group in the CommandBar, if any.
+    /// Managed by `CommandBarCommandGroupsView`; visibility is kept in sync by `hideGroupIfNeeded`.
+    weak var separator: Separator?
+
+     var equalWidthButtons: Bool = false {
+         didSet {
+             stackView.distribution = equalWidthButtons ? .fillEqually : .fill
+         }
+     }
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: buttons)
