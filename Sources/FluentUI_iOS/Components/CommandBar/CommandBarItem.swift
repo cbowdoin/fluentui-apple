@@ -36,13 +36,9 @@ public class CommandBarItemGroup: NSObject, RandomAccessCollection, ExpressibleB
 		self.init(Array(elements))
 	}
 
-	// MARK: RandomAccessCollection
-
 	public var startIndex: Int { items.startIndex }
 	public var endIndex: Int { items.endIndex }
 	public subscript(index: Int) -> CommandBarItem { items[index] }
-
-	// MARK: Equatable (override NSObject reference equality with value equality)
 
 	public override func isEqual(_ object: Any?) -> Bool {
 		guard let other = object as? CommandBarItemGroup else { return false }

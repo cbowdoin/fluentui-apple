@@ -33,7 +33,6 @@ class CommandBarButtonGroupView: UIView {
     }
 
     /// Hides the group view if all the views inside the `stackView` are hidden.
-    /// Also hides the associated `separator` so a dangling divider is never shown for an empty group.
     func hideGroupIfNeeded() {
         var allViewsHidden = true
         for view in stackView.arrangedSubviews {
@@ -47,8 +46,6 @@ class CommandBarButtonGroupView: UIView {
         separator?.isHidden = allViewsHidden
     }
 
-    /// The separator that follows this group in the CommandBar, if any.
-    /// Managed by `CommandBarCommandGroupsView`; visibility is kept in sync by `hideGroupIfNeeded`.
     weak var separator: Separator?
 
      var equalWidthButtons: Bool = false {
