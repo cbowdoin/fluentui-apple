@@ -51,6 +51,21 @@ class CommandBarButtonGroupView: UIView {
         }
     }
 
+    var natrualContentWidth: CGFloat {
+        let visibleButtons = buttons.filter { !$0.isHidden }
+
+        var contentWidth: CGFloat = 0
+        if !visibleButtons.isEmpty {
+            let buttonWidths = visibleButtons.reduce(0) { result, button in
+                result + button.intrinsicContentSize.width
+            }
+
+            let spacings = CGFloat(visibleButtons.count - 1) * CommandBarTokenSet.itemInterspace
+            contentWidth = buttonWidths + spacings
+        }
+        return contentWidth
+    }
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.translatesAutoresizingMaskIntoConstraints = false

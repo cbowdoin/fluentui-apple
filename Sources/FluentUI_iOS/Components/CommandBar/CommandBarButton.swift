@@ -36,10 +36,11 @@ class CommandBarButton: UIButton {
         updateStyle()
     }
 
-    init(item: CommandBarItem, isPersistSelection: Bool = true, tokenSet: CommandBarTokenSet) {
+    init(item: CommandBarItem, isPersistSelection: Bool = true, tokenSet: CommandBarTokenSet, maxTitleWidth: CGFloat? = nil) {
         self.item = item
         self.isPersistSelection = isPersistSelection
         self.tokenSet = tokenSet
+        self.maxTitleWidth = maxTitleWidth
 
         super.init(frame: .zero)
 
@@ -118,7 +119,27 @@ class CommandBarButton: UIButton {
         menu = item.menu
     }
 
+    var maxTitleWidth: CGFloat? {
+        didSet {
+            if (maxTitleWidth != oldValue && item.title != nil) {
+                updateMaxTitleWidthConstraint()
+            }
+        }
+    }
+
     private let isPersistSelection: Bool
+
+    private var maxTitleWidthConstraint: NSLayoutConstraint?
+
+    private func updateMaxTitleWidthConstraint() {
+        maxTitleWidthConstraint?.isActive = false
+
+        if let maxTitleWidth, item.title != nil {
+            let constraint = widthAnchor.constraint(lessThanOrEqualToConstant: maxTitleWidth)
+            constraint.isActive = true
+            maxTitleWidthConstraint = constraint
+        }
+    }
 
     private var accentImageView: UIImageView?
 
