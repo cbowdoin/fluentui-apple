@@ -481,7 +481,7 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
         let availableWidth = scrollView.frame.width - scrollViewContentInset.left - scrollViewContentInset.right
         let targetWidth = natrualWidth > availableWidth ? maxWidth : nil
 
-        if targetWidth == appliedMaxTitleWidth {
+        if targetWidth != appliedMaxTitleWidth {
             appliedMaxTitleWidth = targetWidth
             updateButtonMaxTitleWidth(targetWidth)
         }

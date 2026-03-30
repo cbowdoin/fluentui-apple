@@ -40,9 +40,9 @@ class CommandBarButton: UIButton {
         self.item = item
         self.isPersistSelection = isPersistSelection
         self.tokenSet = tokenSet
-        self.maxTitleWidth = maxTitleWidth
-
         super.init(frame: .zero)
+
+        self.maxTitleWidth = maxTitleWidth
 
         translatesAutoresizingMaskIntoConstraints = false
 
@@ -55,6 +55,7 @@ class CommandBarButton: UIButton {
             buttonConfiguration.imagePadding = CommandBarTokenSet.buttonImagePadding
             buttonConfiguration.contentInsets = CommandBarTokenSet.buttonContentInsets
             buttonConfiguration.background.cornerRadius = tokenSet[.cornerRadius].float
+            buttonConfiguration.titleLineBreakMode = .byTruncatingMiddle
             configuration = buttonConfiguration
 
             let accessibilityDescription = item.accessibilityLabel
