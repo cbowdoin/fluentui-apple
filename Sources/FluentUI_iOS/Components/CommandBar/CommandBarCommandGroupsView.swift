@@ -112,11 +112,11 @@ class CommandBarCommandGroupsView: UIView {
                     separator.topAnchor.constraint(equalTo: separatorContainer.topAnchor, constant: CommandBarTokenSet.separatorVerticalPadding),
                     separator.bottomAnchor.constraint(equalTo: separatorContainer.bottomAnchor, constant: -CommandBarTokenSet.separatorVerticalPadding),
                     separator.leadingAnchor.constraint(equalTo: separatorContainer.leadingAnchor),
-                    separator.trailingAnchor.constraint(equalTo: separatorContainer.trailingAnchor)
+                    separator.trailingAnchor.constraint(equalTo: separatorContainer.trailingAnchor),
+                    separatorContainer.widthAnchor.constraint(equalToConstant: 1)
                 ])
 
                 buttonGroupsStackView.addArrangedSubview(separatorContainer)
-                separatorContainer.widthAnchor.constraint(equalToConstant: 1).isActive = true
             }
         }
     }
