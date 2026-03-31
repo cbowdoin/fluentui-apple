@@ -103,7 +103,6 @@ class CommandBarButton: UIButton {
             widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth).isActive = true
         }
 
-
         configuration?.title = item.title
         configuration?.image = item.iconImage
 
