@@ -102,7 +102,8 @@ public class CommandBarTokenSet: ControlTokenSet<CommandBarToken> {
         }
     }
 
-    var maxButtonWidth: CGFloat = 0.0
+    /// The maximum width of each button in the CommandBar. When greater than 0, buttons will be constrained to this width and truncate text that exceeds it.
+    public var maxButtonWidth: CGFloat = 0.0
 }
 
 // MARK: - Constants
