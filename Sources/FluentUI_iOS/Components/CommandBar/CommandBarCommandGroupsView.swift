@@ -120,7 +120,7 @@ class CommandBarCommandGroupsView: UIView {
         }
     }
 
-    var maxButtonWidth: CGFloat? {
+    var maxButtonWidth: CGFloat = 0 {
         didSet {
             if maxButtonWidth != oldValue {
                 for groupView in buttonGroupViews {

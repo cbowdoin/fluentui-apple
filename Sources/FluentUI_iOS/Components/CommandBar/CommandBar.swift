@@ -253,8 +253,8 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
         }
     }
 
-    /// The maximum width of each button in the CommandBar. When set, buttons will truncate text that exceeds the maximum width.
-    public var maximumButtonWidth: CGFloat? {
+    /// The maximum width of each button in the CommandBar. When greater than 0, buttons will be constrained to this width and truncate text that exceeds it.
+    @objc public var maximumButtonWidth: CGFloat = 0 {
         didSet {
             if maximumButtonWidth != oldValue {
                 leadingCommandGroupsView.maxButtonWidth = maximumButtonWidth

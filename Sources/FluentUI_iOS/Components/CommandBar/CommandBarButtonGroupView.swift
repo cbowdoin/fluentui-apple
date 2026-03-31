@@ -51,12 +51,12 @@ class CommandBarButtonGroupView: UIView {
         }
     }
 
-    var maxButtonWidth: CGFloat? {
+    var maxButtonWidth: CGFloat = 0 {
         didSet {
             if maxButtonWidth != oldValue {
                 NSLayoutConstraint.deactivate(buttonWidthConstraints)
-                if let maxWidth = maxButtonWidth {
-                    buttonWidthConstraints = buttons.map { $0.widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth) }
+                if maxButtonWidth > 0 {
+                    buttonWidthConstraints = buttons.map { $0.widthAnchor.constraint(lessThanOrEqualToConstant: maxButtonWidth) }
                     NSLayoutConstraint.activate(buttonWidthConstraints)
                 } else {
                     buttonWidthConstraints = []
