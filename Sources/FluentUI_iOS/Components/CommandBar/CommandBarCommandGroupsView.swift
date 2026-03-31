@@ -97,6 +97,7 @@ class CommandBarCommandGroupsView: UIView {
         updateButtonGroupViews()
         for view in buttonGroupViews {
             view.equalWidthButtons = equalWidthGroups
+            view.maxButtonWidth = maxButtonWidth
             buttonGroupsStackView.addArrangedSubview(view)
         }
     }
@@ -119,29 +120,14 @@ class CommandBarCommandGroupsView: UIView {
         }
     }
 
-    var maxTitleWidth: CGFloat? {
+    var maxButtonWidth: CGFloat? {
         didSet {
-            if maxTitleWidth != oldValue {
-                for button in itemsToButtonsMap.values {
-                    button.maxTitleWidth = maxTitleWidth
+            if maxButtonWidth != oldValue {
+                for groupView in buttonGroupViews {
+                    groupView.maxButtonWidth = maxButtonWidth
                 }
             }
         }
-    }
-
-    var natrualContentWidth: CGFloat {
-        let visibleGroups = buttonGroupViews.filter { !$0.isHidden }
-
-        var contentWidth: CGFloat = 0
-        if !visibleGroups.isEmpty {
-            let groupWidths = visibleGroups.reduce(0) { result, group in
-                result + group.natrualContentWidth
-            }
-
-            let spacings = CGFloat(visibleGroups.count - 1) * buttonGroupsStackView.spacing
-            contentWidth = groupWidths + spacings
-        }
-        return contentWidth
     }
 
     // MARK: - Private properties

@@ -51,19 +51,18 @@ class CommandBarButtonGroupView: UIView {
         }
     }
 
-    var natrualContentWidth: CGFloat {
-        let visibleButtons = buttons.filter { !$0.isHidden }
-
-        var contentWidth: CGFloat = 0
-        if !visibleButtons.isEmpty {
-            let buttonWidths = visibleButtons.reduce(0) { result, button in
-                result + button.intrinsicContentSize.width
+    var maxButtonWidth: CGFloat? {
+        didSet {
+            if maxButtonWidth != oldValue {
+                NSLayoutConstraint.deactivate(buttonWidthConstraints)
+                if let maxWidth = maxButtonWidth {
+                    buttonWidthConstraints = buttons.map { $0.widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth) }
+                    NSLayoutConstraint.activate(buttonWidthConstraints)
+                } else {
+                    buttonWidthConstraints = []
+                }
             }
-
-            let spacings = CGFloat(visibleButtons.count - 1) * CommandBarTokenSet.itemInterspace
-            contentWidth = buttonWidths + spacings
         }
-        return contentWidth
     }
 
     private lazy var stackView: UIStackView = {
@@ -90,5 +89,6 @@ class CommandBarButtonGroupView: UIView {
         buttons.last?.configuration?.contentInsets.trailing += CommandBarTokenSet.leftRightBuffer
     }
 
+    private var buttonWidthConstraints: [NSLayoutConstraint] = []
     private var tokenSet: CommandBarTokenSet
 }

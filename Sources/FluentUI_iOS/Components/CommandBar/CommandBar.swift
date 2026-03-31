@@ -157,7 +157,6 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
         commandBarContainerStackView.layer.cornerRadius = cornerRadius
         commandBarContainerStackView.layoutIfNeeded()
 
-        applyButtonTruncationIfNeeded()
         updateShadow()
         updateScrollViewShadow()
     }
@@ -254,11 +253,13 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
         }
     }
 
-    /// The maximmum width a button can be before its title is truncated.
-    public var maximumButtonTitleWidth: CGFloat? {
+    /// The maximum width of each button in the CommandBar. When set, buttons will truncate text that exceeds the maximum width.
+    public var maximumButtonWidth: CGFloat? {
         didSet {
-            if maximumButtonTitleWidth != oldValue  {
-                setNeedsLayout()
+            if maximumButtonWidth != oldValue {
+                leadingCommandGroupsView.maxButtonWidth = maximumButtonWidth
+                mainCommandGroupsView.maxButtonWidth = maximumButtonWidth
+                trailingCommandGroupsView.maxButtonWidth = maximumButtonWidth
             }
         }
     }
@@ -299,8 +300,6 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
 
         return maxButtonHeight + CommandBarTokenSet.barInsets * 2
     }
-
-    private var appliedMaxTitleWidth: CGFloat?
 
     // MARK: Views and Layers
 
@@ -467,31 +466,6 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
         trailingCommandGroupsView.updateButtonsShown()
     }
 
-    private func applyButtonTruncationIfNeeded() {
-        guard isScrollable, let maxWidth = maximumButtonTitleWidth else {
-            if appliedMaxTitleWidth != nil {
-                appliedMaxTitleWidth = nil
-                updateButtonMaxTitleWidth(nil)
-            }
-            return
-        }
-
-        let natrualWidth: CGFloat = mainCommandGroupsView.natrualContentWidth
-        let scrollViewContentInset = scrollView.contentInset
-        let availableWidth = scrollView.frame.width - scrollViewContentInset.left - scrollViewContentInset.right
-        let targetWidth = natrualWidth > availableWidth ? maxWidth : nil
-
-        if targetWidth != appliedMaxTitleWidth {
-            appliedMaxTitleWidth = targetWidth
-            updateButtonMaxTitleWidth(targetWidth)
-        }
-    }
-
-    private func updateButtonMaxTitleWidth(_ width: CGFloat?) {
-        leadingCommandGroupsView.maxTitleWidth = width
-        mainCommandGroupsView.maxTitleWidth = width
-        trailingCommandGroupsView.maxTitleWidth = width
-    }
     /// Updates the provided `CommandBarCommandGroupsView` with the `items` array and marks the view as needing a layout
     private func setupGroupsView(_ commandGroupsView: CommandBarCommandGroupsView, with items: [CommandBarItemGroup]?) {
         commandGroupsView.itemGroups = items ?? []
