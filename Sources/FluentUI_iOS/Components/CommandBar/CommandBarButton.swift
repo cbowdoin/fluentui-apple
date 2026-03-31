@@ -98,6 +98,12 @@ class CommandBarButton: UIButton {
             return
         }
 
+        let maxWidth: CGFloat = tokenSet[.maxButtonWidth].float
+        if maxWidth > 0 {
+            widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth).isActive = true
+        }
+
+
         configuration?.title = item.title
         configuration?.image = item.iconImage
 

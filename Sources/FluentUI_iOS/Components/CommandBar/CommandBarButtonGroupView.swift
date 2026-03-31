@@ -62,19 +62,12 @@ class CommandBarButtonGroupView: UIView {
 
     private func configureHierarchy() {
         addSubview(stackView)
-        var constraints: [NSLayoutConstraint] = [
+        NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
-        ]
-
-        let maxWidth = tokenSet.maxButtonWidth
-        if maxWidth > 0 {
-            constraints += buttons.map { $0.widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth) }
-        }
-
-        NSLayoutConstraint.activate(constraints)
+        ])
     }
 
     private func applyInsets() {
