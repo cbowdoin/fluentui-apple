@@ -101,6 +101,8 @@ public class CommandBarTokenSet: ControlTokenSet<CommandBarToken> {
             }
         }
     }
+
+    var maxButtonWidth: CGFloat = 0.0
 }
 
 // MARK: - Constants

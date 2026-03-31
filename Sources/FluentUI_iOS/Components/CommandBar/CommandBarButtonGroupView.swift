@@ -51,20 +51,6 @@ class CommandBarButtonGroupView: UIView {
         }
     }
 
-    var maxButtonWidth: CGFloat = 0 {
-        didSet {
-            if maxButtonWidth != oldValue {
-                NSLayoutConstraint.deactivate(buttonWidthConstraints)
-                if maxButtonWidth > 0 {
-                    buttonWidthConstraints = buttons.map { $0.widthAnchor.constraint(lessThanOrEqualToConstant: maxButtonWidth) }
-                    NSLayoutConstraint.activate(buttonWidthConstraints)
-                } else {
-                    buttonWidthConstraints = []
-                }
-            }
-        }
-    }
-
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,12 +62,19 @@ class CommandBarButtonGroupView: UIView {
 
     private func configureHierarchy() {
         addSubview(stackView)
-        NSLayoutConstraint.activate([
+        var constraints: [NSLayoutConstraint] = [
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
-        ])
+        ]
+
+        let maxWidth = tokenSet.maxButtonWidth
+        if maxWidth > 0 {
+            constraints += buttons.map { $0.widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth) }
+        }
+
+        NSLayoutConstraint.activate(constraints)
     }
 
     private func applyInsets() {
@@ -89,6 +82,5 @@ class CommandBarButtonGroupView: UIView {
         buttons.last?.configuration?.contentInsets.trailing += CommandBarTokenSet.leftRightBuffer
     }
 
-    private var buttonWidthConstraints: [NSLayoutConstraint] = []
     private var tokenSet: CommandBarTokenSet
 }

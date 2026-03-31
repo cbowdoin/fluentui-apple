@@ -257,9 +257,8 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
     @objc public var maximumButtonWidth: CGFloat = 0 {
         didSet {
             if maximumButtonWidth != oldValue {
-                leadingCommandGroupsView.maxButtonWidth = maximumButtonWidth
-                mainCommandGroupsView.maxButtonWidth = maximumButtonWidth
-                trailingCommandGroupsView.maxButtonWidth = maximumButtonWidth
+                tokenSet.maxButtonWidth = maximumButtonWidth
+                updateButtonTokens()
             }
         }
     }

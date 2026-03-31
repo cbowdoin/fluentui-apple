@@ -97,7 +97,6 @@ class CommandBarCommandGroupsView: UIView {
         updateButtonGroupViews()
         for (index, view) in buttonGroupViews.enumerated() {
             view.equalWidthButtons = equalWidthGroups
-            view.maxButtonWidth = maxButtonWidth
             buttonGroupsStackView.addArrangedSubview(view)
 
             if index < buttonGroupViews.count - 1 {
@@ -137,16 +136,6 @@ class CommandBarCommandGroupsView: UIView {
     var equalWidthGroups: Bool = false {
         didSet {
             buttonGroupsStackView.distribution = equalWidthGroups ? .fillEqually : .fill
-        }
-    }
-
-    var maxButtonWidth: CGFloat = 0 {
-        didSet {
-            if maxButtonWidth != oldValue {
-                for groupView in buttonGroupViews {
-                    groupView.maxButtonWidth = maxButtonWidth
-                }
-            }
         }
     }
 
