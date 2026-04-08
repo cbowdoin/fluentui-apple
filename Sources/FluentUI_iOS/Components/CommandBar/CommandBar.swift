@@ -146,7 +146,7 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
     // MARK: Overrides
 
     public override var intrinsicContentSize: CGSize {
-        shouldCalculateIntrinsicHeight ? CGSize(width: UIView.noIntrinsicMetric, height: intrinsicHeight) : .zero
+        return shouldCalculateIntrinsicHeight ? CGSize(width: intrinsicWidth, height: intrinsicHeight) : CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
     }
 
     public override func layoutSubviews() {
@@ -225,7 +225,7 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
     }
 
     /// Whether or not the `CommandBar` is scrollable
-    public var isScrollable: Bool = true {
+    @objc public var isScrollable: Bool = true {
         didSet {
             updateViewHierarchy()
             updateMainCommandGroupsViewConstraints()
@@ -288,6 +288,11 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
         }
 
         return maxButtonHeight + CommandBarTokenSet.barInsets * 2
+    }
+
+    private var intrinsicWidth: CGFloat {
+        let hasIntrinsicSize: Bool = leadingItemGroups == nil && trailingItemGroups == nil && !isScrollable
+        return hasIntrinsicSize ? mainCommandGroupsView.intrinsicContentSize.width : UIView.noIntrinsicMetric
     }
 
     // MARK: Views and Layers

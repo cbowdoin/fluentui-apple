@@ -178,6 +178,29 @@ class CommandBarDemoController: DemoController {
         container.layoutMargins.left = 0
         view.backgroundColor = view.fluentTheme.color(.background4)
 
+        container.addArrangedSubview(createLabelWithText("Non-Scrollable (3 items)"))
+//
+//        let longTextItem = CommandBarItem(iconImage: nil,
+//                                          title: "daisfjvhldsfijhbasdjhgfbalkdjfbailseugbfadskjvb",
+//                                          itemTappedHandler: { _, _ in })
+//        let threeItemCommandBar = CommandBar(itemGroups: [[newItem(for: .add), newItem(for: .mention), newItem(for: .calendar), longTextItem]], leadingItemGroups: nil , trailingItemGroups: nil)
+
+        let threeItemCommandBar = CommandBar(itemGroups: [[newItem(for: .add), newItem(for: .mention), newItem(for: .calendar)]], leadingItemGroups: nil , trailingItemGroups: nil)
+
+        threeItemCommandBar.isScrollable = false
+        threeItemCommandBar.translatesAutoresizingMaskIntoConstraints = false
+
+        let threeItemCommandBarWrapper = UIView()
+        threeItemCommandBarWrapper.translatesAutoresizingMaskIntoConstraints = false
+        threeItemCommandBarWrapper.addSubview(threeItemCommandBar)
+        NSLayoutConstraint.activate([
+            threeItemCommandBar.leadingAnchor.constraint(equalTo: threeItemCommandBarWrapper.leadingAnchor),
+            threeItemCommandBar.topAnchor.constraint(equalTo: threeItemCommandBarWrapper.topAnchor),
+            threeItemCommandBar.bottomAnchor.constraint(equalTo: threeItemCommandBarWrapper.bottomAnchor),
+            threeItemCommandBar.widthAnchor.constraint(lessThanOrEqualToConstant: UIScreen.main.bounds.width)
+        ])
+        container.addArrangedSubview(threeItemCommandBarWrapper)
+
         container.addArrangedSubview(createLabelWithText("Default"))
 
         let commandBar = CommandBar(itemGroups: createItemGroups(), leadingItemGroups: [[newItem(for: .keyboard)]])

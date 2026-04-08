@@ -45,9 +45,13 @@ class CommandBarButtonGroupView: UIView {
         isHidden = allViewsHidden
     }
 
+    override var intrinsicContentSize: CGSize {
+        return stackView.intrinsicContentSize
+    }
+
     var equalWidthButtons: Bool = false {
         didSet {
-            stackView.distribution = equalWidthButtons ? .fillEqually : .fill
+            stackView.distribution = /*equalWidthButtons ? .fillEqually :*/ .fill
         }
     }
 
