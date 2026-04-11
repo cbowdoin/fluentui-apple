@@ -31,6 +31,7 @@ struct Demos {
         DemoDescriptor("Button", ButtonDemoController.self, supportsVisionOS: true),
         DemoDescriptor("CardNudge", CardNudgeDemoController.self, supportsVisionOS: false),
         DemoDescriptor("CommandBar", CommandBarDemoController.self, supportsVisionOS: false),
+        DemoDescriptor("CommandBar (SwiftUI)", CommandBarDemoControllerSwiftUI.self, supportsVisionOS: false),
         DemoDescriptor("DrawerController", DrawerDemoController.self, supportsVisionOS: true),
         DemoDescriptor("HUD", HUDDemoController.self, supportsVisionOS: true),
         DemoDescriptor("IndeterminateProgressBar", IndeterminateProgressBarDemoController.self, supportsVisionOS: false),

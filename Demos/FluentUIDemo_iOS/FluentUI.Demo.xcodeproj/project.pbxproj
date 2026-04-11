@@ -82,7 +82,7 @@
 		807E8B4528F9F8B8002B8F84 /* PillButtonDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807E8B4428F9F8B8002B8F84 /* PillButtonDemoController.swift */; };
 		80AECC0C2630F1BB005AF2F3 /* BottomCommandingDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AECC0B2630F1BB005AF2F3 /* BottomCommandingDemoController.swift */; };
 		80B1F7012628D8BB004DFEE5 /* BottomSheetDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B1F7002628D8BB004DFEE5 /* BottomSheetDemoController.swift */; };
-		AA1234560003000000000001 /* FPSOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1234560003000000000002 /* FPSOverlayView.swift */; };
+		80C503ED2F89C23A0047D0EF /* CommandBarDemoController_SwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C503EC2F89C23A0047D0EF /* CommandBarDemoController_SwiftUI.swift */; };
 		8F0B81122670200300463726 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 8F0B81112670200300463726 /* AppCenterDistribute */; };
 		8F0B8114267021A700463726 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 8F0B8113267021A700463726 /* AppCenterAnalytics */; };
 		8F0B8116267021A700463726 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 8F0B8115267021A700463726 /* AppCenterCrashes */; };
@@ -109,6 +109,7 @@
 		A5CEC21C20E436F20016922A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CEC21A20E436F20016922A /* LaunchScreen.storyboard */; };
 		A5DCA75E211E3A92005F4CB7 /* DrawerDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DCA75D211E3A92005F4CB7 /* DrawerDemoController.swift */; };
 		A5DCA760211E3B4C005F4CB7 /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DCA75F211E3B4C005F4CB7 /* DemoController.swift */; };
+		AA1234560003000000000001 /* FPSOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1234560003000000000002 /* FPSOverlayView.swift */; };
 		B441478F228E02540040E88E /* OtherCellsDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B441478E228E02540040E88E /* OtherCellsDemoController.swift */; };
 		B4414792228F6F740040E88E /* TableViewCellSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4414791228F6F740040E88E /* TableViewCellSampleData.swift */; };
 		B4414794228F6FDF0040E88E /* OtherCellsSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4414793228F6FDF0040E88E /* OtherCellsSampleData.swift */; };
@@ -225,7 +226,7 @@
 		807E8B4428F9F8B8002B8F84 /* PillButtonDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonDemoController.swift; sourceTree = "<group>"; };
 		80AECC0B2630F1BB005AF2F3 /* BottomCommandingDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCommandingDemoController.swift; sourceTree = "<group>"; };
 		80B1F7002628D8BB004DFEE5 /* BottomSheetDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetDemoController.swift; sourceTree = "<group>"; };
-		AA1234560003000000000002 /* FPSOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPSOverlayView.swift; sourceTree = "<group>"; };
+		80C503EC2F89C23A0047D0EF /* CommandBarDemoController_SwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandBarDemoController_SwiftUI.swift; sourceTree = "<group>"; };
 		9211BC602BD97B7900B95200 /* DemoHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoHostingController.swift; sourceTree = "<group>"; };
 		92279B342B97F5D900994D88 /* ButtonDemoController_SwiftUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonDemoController_SwiftUI.swift; sourceTree = "<group>"; };
 		923DF2DA271158C900637646 /* libFluentUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFluentUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,6 +257,7 @@
 		A5CEC21D20E436F20016922A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5DCA75D211E3A92005F4CB7 /* DrawerDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerDemoController.swift; sourceTree = "<group>"; };
 		A5DCA75F211E3B4C005F4CB7 /* DemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoController.swift; sourceTree = "<group>"; };
+		AA1234560003000000000002 /* FPSOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPSOverlayView.swift; sourceTree = "<group>"; };
 		B441478E228E02540040E88E /* OtherCellsDemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCellsDemoController.swift; sourceTree = "<group>"; };
 		B4414791228F6F740040E88E /* TableViewCellSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellSampleData.swift; sourceTree = "<group>"; };
 		B4414793228F6FDF0040E88E /* OtherCellsSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCellsSampleData.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				6FEED93A28A6E5520099D178 /* AliasColorTokensDemoController.swift */,
 				92BF13312BE405710068422C /* AliasColorTokensDemoController_SwiftUI.swift */,
 				6F453CA428AC536300ED91A4 /* ShadowTokensDemoController.swift */,
+				80C503EC2F89C23A0047D0EF /* CommandBarDemoController_SwiftUI.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				66963D0C29CB792E006F5FA9 /* TwoLineTitleViewDemoController.swift in Sources */,
 				497DC2DE24185896008D86F8 /* PillButtonBarDemoController.swift in Sources */,
 				B4EF53C5215C45C400573E8F /* PersonaListViewDemoController.swift in Sources */,
+				80C503ED2F89C23A0047D0EF /* CommandBarDemoController_SwiftUI.swift in Sources */,
 				A5DCA75E211E3A92005F4CB7 /* DrawerDemoController.swift in Sources */,
 				92EFD3E42BDA28F100DB35F2 /* TooltipDemoController_SwiftUI.swift in Sources */,
 				B4414792228F6F740040E88E /* TableViewCellSampleData.swift in Sources */,
