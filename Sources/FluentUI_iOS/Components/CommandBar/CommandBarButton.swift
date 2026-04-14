@@ -106,12 +106,11 @@ class CommandBarButton: UIButton {
         configuration?.title = item.title
         configuration?.image = item.iconImage
 
+        // Priotize squishing items with titles before others
         if item.title != nil {
             setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-            setContentHuggingPriority(.defaultHigh, for: .horizontal)
         } else {
             setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-            setContentHuggingPriority(.defaultHigh, for: .horizontal)
         }
 
         if let font = item.titleFont {

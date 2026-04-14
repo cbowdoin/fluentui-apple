@@ -133,8 +133,8 @@ struct CommandBarSwiftUIDemoView: View {
                     .frame(width: 60, height: 60)
                 Image(systemName: "star")
                 Image(systemName: "circle")
-//                Text("sdajlfgahdsjkf")
-//                    .truncationMode(.middle)
+                Text("sdajlfgahdsjkf")
+                    .truncationMode(.middle)
             }
             .frame(width: containerWidth)
             .border(.green)

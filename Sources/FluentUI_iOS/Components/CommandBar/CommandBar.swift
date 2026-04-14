@@ -331,15 +331,6 @@ public class CommandBar: UIView, Shadowable, TokenizedControl {
         commandBarContainerStackView.addArrangedSubview(trailingCommandGroupsView)
         commandBarContainerStackView.directionalLayoutMargins = stackViewLayoutMargins()
 
-        // Leading/trailing groups are fixed — resist growing and compressing.
-        // The container fills all remaining space and defers compression to its text button content.
-        leadingCommandGroupsView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        leadingCommandGroupsView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        trailingCommandGroupsView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        trailingCommandGroupsView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        containerView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        containerView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-
         updateViewHierarchy()
         updateMainCommandGroupsViewConstraints()
 

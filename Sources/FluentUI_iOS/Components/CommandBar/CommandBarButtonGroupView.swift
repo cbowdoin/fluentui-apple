@@ -25,15 +25,6 @@ class CommandBarButtonGroupView: UIView {
         configureHierarchy()
         applyInsets()
         hideGroupIfNeeded()
-
-        let hasTextButtons = buttons.contains { $0.item.title != nil }
-        if hasTextButtons {
-            setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-            setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        } else {
-            setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-            setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        }
     }
 
     @available(*, unavailable)
