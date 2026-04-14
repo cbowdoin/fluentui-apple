@@ -33,38 +33,57 @@ struct CommandBarRepresentable: UIViewRepresentable {
     var trailingItemGroups: [CommandBarItemGroup]?
     var isScrollable: Bool = true
 
-    func makeUIView(context: Context) -> CommandBar {
+    func makeUIView(context: Context) -> UIView {
         let commandBar = CommandBar(itemGroups: itemGroups,
                                     leadingItemGroups: leadingItemGroups,
                                     trailingItemGroups: trailingItemGroups)
         commandBar.isScrollable = isScrollable
         commandBar.setContentHuggingPriority(.required, for: .vertical)
         commandBar.setContentCompressionResistancePriority(.required, for: .vertical)
-        return commandBar
+
+        commandBar.translatesAutoresizingMaskIntoConstraints = false
+
+        let containerView = UIView()
+        containerView.addSubview(commandBar)
+        // Scrollable: fill the container so the scroll area has a full-width frame.
+        // Non-scrollable: cap to container width so the bar shrinks to its natural content size.
+        let widthConstraint = isScrollable
+            ? commandBar.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            : commandBar.widthAnchor.constraint(lessThanOrEqualTo: containerView.widthAnchor)
+        NSLayoutConstraint.activate([
+            commandBar.topAnchor.constraint(equalTo: containerView.topAnchor),
+            commandBar.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            widthConstraint,
+            commandBar.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+
+        return containerView
     }
 
-    func updateUIView(_ commandBar: CommandBar, context: Context) {
+    func updateUIView(_ commandBarContiner: UIView, context: Context) {
+        let commandBar = commandBarContiner.subviews.first as! CommandBar
+
         commandBar.itemGroups = itemGroups
         commandBar.leadingItemGroups = leadingItemGroups
         commandBar.trailingItemGroups = trailingItemGroups
         commandBar.isScrollable = isScrollable
     }
 
-    func sizeThatFits(_ proposal: ProposedViewSize, uiView: CommandBar, context: Context) -> CGSize? {
-        let height = uiView.intrinsicContentSize.height
+    func sizeThatFits(_ proposal: ProposedViewSize, uiView: UIView, context: Context) -> CGSize? {
+        let height = (uiView.subviews.first as? CommandBar)?.intrinsicContentSize.height ?? uiView.intrinsicContentSize.height
         let targetSize = CGSize(width: proposal.width ?? UIView.layoutFittingCompressedSize.width,
                                 height: height)
-        let fittingSize = uiView.systemLayoutSizeFitting(targetSize,
-                                                         withHorizontalFittingPriority: .fittingSizeLevel,
-                                                         verticalFittingPriority: .required)
-        // Use the ideal (fitting) width, but cap to the proposed width so the bar
-        // accepts compression and truncates text when space is tight.
-        let width = if let proposedWidth = proposal.width {
-            min(fittingSize.width, proposedWidth)
-        } else {
-            fittingSize.width
-        }
-        return CGSize(width: width, height: height)
+//        let fittingSize = uiView.systemLayoutSizeFitting(targetSize,
+//                                                         withHorizontalFittingPriority: .fittingSizeLevel,
+//                                                         verticalFittingPriority: .required)
+//        // Use the ideal (fitting) width, but cap to the proposed width so the bar
+//        // accepts compression and truncates text when space is tight.
+//        let width = if let proposedWidth = proposal.width {
+//            min(fittingSize.width, proposedWidth)
+//        } else {
+//            fittingSize.width
+//        }
+        return targetSize
     }
 }
 
@@ -105,6 +124,21 @@ struct CommandBarSwiftUIDemoView: View {
             .frame(width: containerWidth)
             .border(.green)
 
+            HStack(spacing: 12) {
+                Image(systemName: "star")
+                Image(systemName: "circle")
+                Rectangle()
+                    .frame(width: 60, height: 60)
+                Rectangle()
+                    .frame(width: 60, height: 60)
+                Image(systemName: "star")
+                Image(systemName: "circle")
+//                Text("sdajlfgahdsjkf")
+//                    .truncationMode(.middle)
+            }
+            .frame(width: containerWidth)
+            .border(.green)
+
             Spacer()
 
             VStack(spacing: 8) {
@@ -112,7 +146,7 @@ struct CommandBarSwiftUIDemoView: View {
                     .font(.footnote)
                     .foregroundColor(.secondary)
 
-                Slider(value: $containerWidth, in: 300...600, step: 1)
+                Slider(value: $containerWidth, in: 100...600, step: 1)
                     .padding(.horizontal, 24)
             }
             .padding(.bottom, 24)

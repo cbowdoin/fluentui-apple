@@ -108,6 +108,10 @@ class CommandBarButton: UIButton {
 
         if item.title != nil {
             setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        } else {
+            setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+            setContentHuggingPriority(.defaultHigh, for: .horizontal)
         }
 
         if let font = item.titleFont {
