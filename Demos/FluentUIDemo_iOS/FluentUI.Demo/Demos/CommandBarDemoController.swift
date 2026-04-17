@@ -159,6 +159,7 @@ class CommandBarDemoController: DemoController {
 
     var defaultCommandBar: CommandBar?
     var animateCommandBarDelegateEvents: Bool = false
+    var isGlassStyle: Bool = true
 
     lazy var textField: UITextField = {
         let textField = UITextField()
@@ -180,7 +181,7 @@ class CommandBarDemoController: DemoController {
 
         container.addArrangedSubview(createLabelWithText("Default"))
 
-        let commandBar = CommandBar(itemGroups: createItemGroups(), leadingItemGroups: [[newItem(for: .keyboard)]])
+		let commandBar = CommandBar(itemGroups: createItemGroups(), leadingItemGroups: [[newItem(for: .keyboard)]], style: .glass)
         commandBar.delegate = self
         commandBar.translatesAutoresizingMaskIntoConstraints = false
         container.addArrangedSubview(commandBar)
@@ -269,13 +270,21 @@ class CommandBarDemoController: DemoController {
         commandBarDelegateEventAnimationView.addArrangedSubview(commandBarDelegateEventAnimationSwitch)
         itemCustomizationContainer.addArrangedSubview(commandBarDelegateEventAnimationView)
 
+        let glassStyleStackView = createHorizontalStackView()
+        glassStyleStackView.addArrangedSubview(createLabelWithText("Glass Style"))
+        let glassStyleSwitch = BrandedSwitch()
+        glassStyleSwitch.isOn = isGlassStyle
+        glassStyleSwitch.addTarget(self, action: #selector(glassStyleValueChanged), for: .valueChanged)
+        glassStyleStackView.addArrangedSubview(glassStyleSwitch)
+        itemCustomizationContainer.addArrangedSubview(glassStyleStackView)
+
         itemCustomizationContainer.addArrangedSubview(UIView()) //Spacer
 
         container.addArrangedSubview(itemCustomizationContainer)
 
         container.addArrangedSubview(createLabelWithText("With Fixed Button"))
 
-        let fixedButtonCommandBar = CommandBar(itemGroups: createItemGroups(), leadingItemGroups: [[newItem(for: .copy)]], trailingItemGroups: [[newItem(for: .keyboard)]])
+		let fixedButtonCommandBar = CommandBar(itemGroups: createItemGroups(), leadingItemGroups: [[newItem(for: .copy)]], trailingItemGroups: [[newItem(for: .keyboard)]], style: .glass)
         fixedButtonCommandBar.translatesAutoresizingMaskIntoConstraints = false
         container.addArrangedSubview(fixedButtonCommandBar)
 
@@ -293,7 +302,7 @@ class CommandBarDemoController: DemoController {
 
         container.addArrangedSubview(textFieldContainer)
 
-        let accessoryCommandBar = CommandBar(itemGroups: createItemGroups(), trailingItemGroups: [[newItem(for: .keyboard)]])
+		let accessoryCommandBar = CommandBar(itemGroups: createItemGroups(), trailingItemGroups: [[newItem(for: .keyboard)]],style: .glass)
         accessoryCommandBar.translatesAutoresizingMaskIntoConstraints = false
 #if os(iOS)
         textField.inputAccessoryView = accessoryCommandBar
@@ -468,6 +477,23 @@ class CommandBarDemoController: DemoController {
 
     @objc func animateCommandBarDelegateEventsValueChanged(sender: UISwitch!) {
         animateCommandBarDelegateEvents = sender.isOn
+    }
+
+    @objc func glassStyleValueChanged(sender: UISwitch!) {
+        isGlassStyle = sender.isOn
+        guard let commandBar = defaultCommandBar,
+              let stackView = commandBar.superview as? UIStackView,
+              let index = stackView.arrangedSubviews.firstIndex(of: commandBar) else {
+            return
+        }
+        let newCommandBar = CommandBar(itemGroups: createItemGroups(),
+                                       leadingItemGroups: [[newItem(for: .keyboard)]],
+                                       style: isGlassStyle ? .glass : .primary)
+        newCommandBar.delegate = self
+        newCommandBar.translatesAutoresizingMaskIntoConstraints = false
+        commandBar.removeFromSuperview()
+        stackView.insertArrangedSubview(newCommandBar, at: index)
+        defaultCommandBar = newCommandBar
     }
 
     @objc func refreshDefaultBarItems(sender: UIButton!) {

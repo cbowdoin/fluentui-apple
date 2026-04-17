@@ -8,6 +8,15 @@ import FluentUI_common
 #endif
 import UIKit
 
+@objc(MSFCommandBarStyle)
+public enum CommandBarStyle: Int {
+    /// Default style — solid background color.
+    case primary
+
+    /// Glass material background (UIGlassEffect on iOS 26+, UIBlurEffect on earlier).
+    case glass
+}
+
 public enum CommandBarToken: Int, TokenSetKey {
     /// The background color of the Command Bar.
     case backgroundColor
@@ -57,11 +66,19 @@ public enum CommandBarToken: Int, TokenSetKey {
 
 /// Design token set for the `CommandBar` control.
 public class CommandBarTokenSet: ControlTokenSet<CommandBarToken> {
-    init() {
-        super.init { token, theme in
+    init(style: @escaping () -> CommandBarStyle) {
+        self.style = style
+        super.init { [style] token, theme in
             switch token {
             case .backgroundColor:
-                return .uiColor { theme.color(.background2) }
+                return .uiColor {
+                    switch style() {
+                    case .primary:
+                        return theme.color(.background2)
+                    case .glass:
+                        return .clear
+                    }
+                }
 
             case .cornerRadius:
                 return .float { GlobalTokens.corner(.radius120) }
@@ -107,6 +124,8 @@ public class CommandBarTokenSet: ControlTokenSet<CommandBarToken> {
             }
         }
     }
+
+    var style: () -> CommandBarStyle
 }
 
 // MARK: - Constants
